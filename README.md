@@ -52,3 +52,9 @@ This will publish a **laravel-funcqueue.php** configuration file to your **confi
 ## **License**
 
 KunduMagicFunctionJob is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+> If a function has a return value, it may not be ideal to use this package, as the function will be executed as a job and it may be difficult to obtain the return value from the job. It's generally recommended to use this package for functions that perform asynchronous or background tasks, rather than functions that return values or have side effects.
+> 
+> If you need to obtain a return value from a function, you may want to consider using a different approach, such as calling the function directly or using a synchronous job.

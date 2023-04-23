@@ -23,16 +23,16 @@
         "issues": "https://github.com/kundu/laravel-funcqueue/issues"
     },
     "require": {
-        "php": "^7.4",
-        "illuminate/support": "^7.0",
-        "illuminate/queue": "^7.0"
+        "php": "^8.0",
+        "illuminate/support": "^8.0",
+        "illuminate/queue": "^8.0"
     },
     "autoload": {
         "psr-4": {
             "kundu\\LaravelFuncQueue\\": "src/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "extra": {
         "laravel": {
             "providers": [

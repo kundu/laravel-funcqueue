@@ -2,11 +2,13 @@
 
 namespace kundu\LaravelFuncQueue;
 
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 /**
  * The KunduFunctionJob class represents a job that can be dispatched to run a function.
@@ -67,10 +69,14 @@ class KunduFunctionJob implements ShouldQueue
      */
     public function handle()
     {
-        // Create an instance of the specified class using the specified constructor parameters
-        $instance = app()->makeWith($this->class, $this->constructorParams);
+        try {
+            $instance = app()->makeWith($this->class, $this->constructorParams);
+            call_user_func_array([$instance, $this->method], $this->params);
+        }
+        catch(Exception $exception){
+            Log::error('Error running queued function: ' . $exception->getMessage(), ["Exception details" => $exception]);
+        }
 
-        // Call the specified method on the instance with the specified parameters
-        call_user_func_array([$instance, $this->method], $this->params);
+
     }
 }

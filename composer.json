@@ -35,9 +35,6 @@
     "minimum-stability": "dev",
     "extra": {
         "laravel": {
-            "providers": [
-                "kundu\\LaravelFuncQueue\\LaravelFuncQueueServiceProvider"
-            ],
             "config": {
                 "laravel-funcqueue": {
                     "path": "config/config.php"

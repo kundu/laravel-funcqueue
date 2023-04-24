@@ -32,15 +32,6 @@
             "kundu\\LaravelFuncQueue\\": "src/"
         }
     },
-    "minimum-stability": "dev",
-    "extra": {
-        "laravel": {
-            "config": {
-                "laravel-funcqueue": {
-                    "path": "config/config.php"
-                }
-            }
-        }
-    },
+    "minimum-stability": "dev", 
     "version": "1.0.0"
 }

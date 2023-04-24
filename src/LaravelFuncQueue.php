@@ -15,6 +15,13 @@ class LaravelFuncQueue
     protected static $constructorParams = [];
 
     /**
+     * The name of the queue on which to run the job.
+     *
+     * @var string|null
+     */
+    protected static $queue;
+
+    /**
      * Set the constructor parameters that should be passed to the function being dispatched.
      *
      * @param  array  $params
@@ -25,6 +32,19 @@ class LaravelFuncQueue
         static::$constructorParams = $params;
 
         return new static;
+    }
+
+    /**
+     * Set the name of the queue on which to run the job.
+     *
+     * @param  string|null  $queue
+     * @return static
+     */
+    public function onQueue(?string $queue)
+    {
+        static::$queue = $queue;
+
+        return $this;
     }
 
     /**
@@ -39,7 +59,7 @@ class LaravelFuncQueue
      */
     public static function run(string $class, string $method, array $params = [])
     {
-        $queue = config('laravel-funcqueue.queue', 'default');
+        $queue = static::$queue ?: 'default';
         KunduFunctionJob::dispatch(self::getFullClassName($class), $method, $params, static::$constructorParams)->onQueue($queue);
     }
 
@@ -58,5 +78,4 @@ class LaravelFuncQueue
 
         return $namespace . '\\' . $className;
     }
-
 }

@@ -60,7 +60,7 @@ class LaravelFuncQueue
     public static function run(string $class, string $method, array $params = [])
     {
         $queue = static::$queue ?: 'default';
-        KunduFunctionJob::dispatch(self::getFullClassName($class), $method, $params, static::$constructorParams)->onQueue($queue);
+        KunduFunctionJob::dispatch((new self())->getFullClassName($class), $method, $params, static::$constructorParams)->onQueue($queue);
     }
 
     /**

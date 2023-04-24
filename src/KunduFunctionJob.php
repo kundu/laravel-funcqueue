@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use ReflectionClass;
 
 /**
  * The KunduFunctionJob class represents a job that can be dispatched to run a function.
@@ -70,8 +71,11 @@ class KunduFunctionJob implements ShouldQueue
     public function handle()
     {
         try {
-            $instance = app()->makeWith($this->class, $this->constructorParams);
-            call_user_func_array([$instance, $this->method], $this->params);
+            $reflectionClass = new ReflectionClass($this->class);
+            $instance = $reflectionClass->newInstanceArgs($this->constructorParams);
+
+            $method = $reflectionClass->getMethod($this->method);
+            $method->invokeArgs($instance, $this->params);
         }
         catch(Exception $exception){
             Log::error('Error running queued function: ' . $exception->getMessage(), ["Exception details" => $exception]);

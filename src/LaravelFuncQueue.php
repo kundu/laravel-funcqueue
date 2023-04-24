@@ -60,22 +60,6 @@ class LaravelFuncQueue
     public static function run(string $class, string $method, array $params = [])
     {
         $queue = static::$queue ?: 'default';
-        KunduFunctionJob::dispatch((new self())->getFullClassName($class), $method, $params, static::$constructorParams)->onQueue($queue);
-    }
-
-    /**
-     * Get the fully qualified class name for the specified class.
-     *
-     * @param  string  $class The name of the class. This can be either a fully qualified class name
-     *                        in the format `MyClass::class`, or a string containing just the class name
-     *                        if the class is in the global namespace.
-     * @return string The fully qualified class name with namespace.
-     */
-    private function getFullClassName(string $class): string
-    {
-        $className = class_basename($class);
-        $namespace = rtrim(str_replace('\\' . $className, '', $class), '\\');
-
-        return $namespace . '\\' . $className;
+        KunduFunctionJob::dispatch($class, $method, $params, static::$constructorParams)->onQueue($queue);
     }
 }

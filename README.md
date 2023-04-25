@@ -7,7 +7,7 @@
 You can install the package using Composer:
 
 ```plaintext
-composer require kundu/laravel-funcqueue:dev-main
+composer require kundu/laravel-funcqueue
 ```
 
 The package will automatically register its service provider.

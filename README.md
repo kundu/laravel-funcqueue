@@ -1,6 +1,6 @@
-## **FuncQueue**
+## **LaravelFuncQueue**
 
-**FuncQueue is a Laravel package that allows you to easily run functions as queued jobs. This package provides a simple and flexible functions for dispatching queued jobs that run the specified function in the specified class.**
+**LaravelFuncQueue is a Laravel package that allows you to easily run functions as queued jobs. This package provides a simple and flexible functions for dispatching queued jobs that run the specified function in the specified class.**
 
 ## **Installation**
 
